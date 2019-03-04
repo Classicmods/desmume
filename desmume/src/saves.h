@@ -21,6 +21,11 @@
 #define _SRAM_H
 
 #include "types.h"
+#ifdef HAVE_ZLIB
+#include "zlib.h"
+#else
+#define Z_DEFAULT_COMPRESSION 0
+#endif
 
 #define NB_STATES 10
 
@@ -64,6 +69,6 @@ void savestate_slot(int num);
 void loadstate_slot(int num);
 
 bool savestate_load(class EMUFILE &is);
-bool savestate_save(class EMUFILE &outstream, int compressionLevel);
+bool savestate_save(class EMUFILE &outstream, int compressionLevel = Z_DEFAULT_COMPRESSION);
 
 #endif
